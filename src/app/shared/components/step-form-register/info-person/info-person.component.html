@@ -1,0 +1,417 @@
+<p-toast></p-toast>
+<br>
+<section>
+  <h1><b>Ingresa tu información</b></h1>
+  <br>
+  <form [formGroup]="formRegisterPersonal">
+    <div class="grid">
+      <div class="col-12 md:col-6 lg:col-4">
+        <div class="inputbox">
+          <input type="text" formControlName="nameUser" placeholder="Escribe tu nombre" id="user"
+            pattern="^[A-Za-z\s]+$" minlength="3" maxlength="60"
+            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('nameUser')?.invalid && formRegisterPersonal.get('nameUser')?.touched }">
+          <label>Nombre</label>
+          <div
+            *ngIf="formRegisterPersonal.get('nameUser')?.invalid && (formRegisterPersonal.get('nameUser')?.dirty || formRegisterPersonal.get('nameUser')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('nameUser')?.errors?.['required']">El campo de nombre es
+              obligatorio.</span>
+            <span *ngIf="formRegisterPersonal.get('nameUser')?.errors?.['pattern']">El campo debe contener solo
+              letras.</span>
+            <span *ngIf="formRegisterPersonal.get('nameUser')?.errors?.['minlength']">El nombre debe tener al menos 3
+              caracteres.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <div class="inputbox">
+          <input type="text" formControlName="lastName" placeholder="Escribe tu apellido" id="lastName"
+            pattern="^[A-Za-z\s]+$" minlength="3" maxlength="60"
+            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('lastName')?.invalid && formRegisterPersonal.get('lastName')?.touched }">
+          <label>Apellido</label>
+          <div
+            *ngIf="formRegisterPersonal.get('lastName')?.invalid && (formRegisterPersonal.get('lastName')?.dirty || formRegisterPersonal.get('lastName')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('lastName')?.errors?.['required']">El campo de apellido es
+              obligatorio.</span>
+            <span *ngIf="formRegisterPersonal.get('lastName')?.errors?.['pattern']">El campo debe contener solo
+              letras.</span>
+            <span *ngIf="formRegisterPersonal.get('lastName')?.errors?.['minlength']">El apellido debe tener al menos 3
+              caracteres.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <label class="p-label">Fecha de Nacimiento</label>
+        <div class="p-fluid">
+          <p-calendar formControlName="birtDate" dateFormat="yy/mm/dd" [maxDate]="maxDate" [showIcon]="true"></p-calendar>
+        </div>
+      </div>
+      <!-- aca va codico dropdowm -->
+      <div class="col-12 md:col-6 lg:col-4">
+        <label class="p-label">Tipo de documento</label>
+        <p-dropdown [options]="documentType" formControlName="docType" placeholder="Cedula" [editable]="false"
+          optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" filterPlaceholder="Buscar opción"
+          emptyFilterMessage="Sin resultados">
+        </p-dropdown>
+        <div
+          *ngIf="formRegisterPersonal.get('docType')?.invalid && (formRegisterPersonal.get('docType')?.dirty || formRegisterPersonal.get('docType')?.touched)">
+          <span *ngIf="formRegisterPersonal.get('docType')?.errors?.['required']">El tipo de documento es
+            obligatorio.</span>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <div class="inputbox">
+          <input type="text" formControlName="identification" placeholder="Digita tu identificación" id="idCC"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" minlength="8" maxlength="20"
+            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('identification')?.invalid && formRegisterPersonal.get('identification')?.touched }">
+          <label>ID Nacional</label>
+          <div
+            *ngIf="formRegisterPersonal.get('identification')?.invalid && (formRegisterPersonal.get('identification')?.dirty || formRegisterPersonal.get('identification')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('identification')?.errors?.['required']">El número de identificación
+              es
+              obligatorio.</span>
+            <span *ngIf="formRegisterPersonal.get('identification')?.errors?.['minlength']">El número debe tener al
+              menos 8 caracteres.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <div class="inputbox">
+          <input type="text" formControlName="passport" placeholder="Escribe tu numero de pasaporte" id="pasaporte"
+            maxlength="100"
+            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('passport')?.invalid && formRegisterPersonal.get('passport')?.touched }">
+          <label>Pasaporte</label>
+          <div
+            *ngIf="formRegisterPersonal.get('passport')?.invalid && (formRegisterPersonal.get('passport')?.dirty || formRegisterPersonal.get('passport')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('passport')?.errors?.['required']">El pasaporte es obligatorio.</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <label class="p-label">Pais</label>
+        <p-dropdown [options]="countryCodes" placeholder="Colombia" [editable]="false" optionLabel="dial_code"
+          [filter]="true" filterBy="name" [showClear]="true" filterPlaceholder="Buscar opción" [(ngModel)]="country"
+          emptyFilterMessage="Sin resultados" [ngModelOptions]="{standalone: true}">
+          <ng-template pTemplate="selectedItem">
+            <div class="flex align-items-center gap-2" *ngIf="country">
+              <i [class]="getFlagClass(country.code)"></i>
+              <div>{{ country.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <i [class]="getFlagClass(country.code)"></i>
+              <div>{{ country.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <div class="inputbox">
+          <input type="text" formControlName="city" placeholder="Escribe tu ciudad de residencia" id="city">
+          <label>Ciudad</label>
+        </div>
+      </div>
+
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <div class="inputbox">
+          <input type="text" formControlName="address" placeholder="Escribe tu dirección física" id="direccion"
+            maxlength="100"
+            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('address')?.invalid && formRegisterPersonal.get('address')?.touched }">
+          <label>Dirección</label>
+          <div
+            *ngIf="formRegisterPersonal.get('address')?.invalid && (formRegisterPersonal.get('address')?.dirty || formRegisterPersonal.get('address')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('address')?.errors?.['required']">La direción es obligatoria.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- aca va codico dropdowm -->
+      <div class="col-12 md:col-6 lg:col-4">
+        <label class="p-label">Tipo de moneda</label>
+        <p-dropdown [options]="codeMoney" formControlName="codeMoney" placeholder="USD" [editable]="false"
+          optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" filterPlaceholder="Buscar opción"
+          emptyFilterMessage="Sin resultados">
+        </p-dropdown>
+      </div>
+
+      <!-- aca va codico dropdowm -->
+      <div class="col-12 md:col-6 lg:col-4">
+        <label class="p-label">Indicativo celular</label>
+        <p-dropdown [options]="countryCodes" placeholder="+00" [editable]="false" optionLabel="dial_code"
+          [filter]="true" filterBy="name" [showClear]="true" filterPlaceholder="Buscar opción" [(ngModel)]="codePrueba"
+          emptyFilterMessage="Sin resultados" [ngModelOptions]="{standalone: true}">
+          <ng-template pTemplate="selectedItem">
+            <div class="flex align-items-center gap-2" *ngIf="codePrueba">
+              <i [class]="getFlagClass(codePrueba.code)"></i>
+              <div>{{ codePrueba.dial_code }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <i [class]="getFlagClass(country.code)"></i>
+              <div>{{ country.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <div class="inputbox">
+          <input type="text" formControlName="celphoneNumber" placeholder="Digita tu número de celular" id="cell"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" minlength="10" maxlength="15"
+            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('celphoneNumber')?.invalid && formRegisterPersonal.get('celphoneNumber')?.touched }">
+          <label>Número Celular</label>
+
+          <div
+            *ngIf="formRegisterPersonal.get('celphoneNumber')?.invalid && (formRegisterPersonal.get('celphoneNumber')?.dirty || formRegisterPersonal.get('celphoneNumber')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('celphoneNumber')?.errors?.['required']">El número de celular es
+              obligatorio.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-4">
+        <div class="inputbox">
+          <input type="text" formControlName="email" placeholder="Escribe tu correo electrónico" id="mail"
+            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('email')?.invalid && formRegisterPersonal.get('email')?.touched }">
+          <label>E-mail</label>
+
+          <div
+            *ngIf="formRegisterPersonal.get('email')?.invalid && (formRegisterPersonal.get('email')?.dirty || formRegisterPersonal.get('email')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('email')?.errors?.['required']">El
+              correo electrónico es obligatorio.</span>
+            <span *ngIf="formRegisterPersonal.get('email')?.errors?.['email']">El
+              formato del correo electrónico no es válido.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-6 lg:col-5">
+        <div class="inputbox">
+          <input type="text" formControlName="userName" placeholder="Escribe tu nombre de usuario" id="userName" minlength="3"
+            maxlength="60"
+            onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('userName')?.invalid && formRegisterPersonal.get('userName')?.touched }">
+          <label>Nombre de usuario</label>
+          <div
+            *ngIf="formRegisterPersonal.get('userName')?.invalid && (formRegisterPersonal.get('userName')?.dirty || formRegisterPersonal.get('userName')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('userName')?.errors?.['required']">El campo de nombre es
+              obligatorio.</span>
+            <span *ngIf="formRegisterPersonal.get('userName')?.errors?.['minlength']">El nombre debe tener al menos 3
+              caracteres.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 md:col-12 lg:col-3">
+        <label class="p-label">Elige una contraseña</label>
+        <p-password formControlName="pass" id="password2"  placeholder="Contraseña"
+          [toggleMask]="true" weakLabel="Bajo" mediumLabel="Medio" strongLabel="Dificil">
+          <ng-template pTemplate="header">
+            <h6>Elige una contraseña</h6>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <p-divider></p-divider>
+            <p class="mt-2">Sugerencias</p>
+            <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                <li>Al menos una minúscula</li>
+                <li>Al menos una mayúscula</li>
+                <li>Al menos un número</li>
+                <li>Mínimo 8 caracteres</li>
+            </ul>
+        </ng-template>
+        </p-password>
+        <div
+          *ngIf="formRegisterPersonal.get('pass')?.invalid && (formRegisterPersonal.get('pass')?.dirty || formRegisterPersonal.get('pass')?.touched)">
+          <span *ngIf="formRegisterPersonal.get('pass')?.errors?.['required']">La contraseña es obligatoria.</span>
+        </div>
+
+      </div>
+
+      <div class="col-12 md:col-12 lg:col-12">
+        <div class="inputbox">
+          <p-checkbox formControlName="acceptTerm" value="Aceptar terminos" id="politicas-link"></p-checkbox>
+          <h1 class="terminos-label">
+            He leído y aceptado la Autorización de <button type="button" class="button-link"
+              (click)="validTerminos()">Tratamiento de
+              datos y política de privacidad,</button>
+            declarando bajo gravedad de juramento que estoy autorizado para suministrar la información requerida.
+          </h1>
+        </div>
+      </div>
+
+    </div>
+    <div class="grid grid-nogutter justify-content-end">
+      <p-button label="Siguiente" (onClick)="sendDataPersonal()" icon="pi pi-angle-right" iconPos="right"
+       [disabled]="formRegisterPersonal.invalid">
+      </p-button>
+    </div>
+  </form>
+
+</section>
+
+<p-dialog header="Política de Privacidad" [(visible)]="checkTerm" [modal]="true" [style]="{width: '50vw'}">
+  <div class="container" style="text-align: justify">
+    <header>
+      <h1><strong>NUESTRO COMPROMISO CON LA PRIVACIDAD</strong></h1>
+    </header>
+    <main>
+      <p>La presente Política de Privacidad establece los términos en que SALVADOR SV usa y protege la información que
+        es proporcionada por sus usuarios. En SALVADOR SV entendemos lo importante que es la privacidad para nuestros
+        Clientes. Por lo tanto, nos comprometemos a mantener la confidencialidad, integridad y seguridad de toda la
+        información personal.</p>
+
+      <p>Recopilamos solo lo que necesitamos para brindar un servicio seguro y no compartimos sus datos personales con
+        terceros, excepto para garantizar la seguridad, la calidad y ciertos aspectos de nuestro servicio, para cumplir
+        con las leyes y reglamentos, así como para su seguridad, la de nuestros Clientes. Cuando compartimos sus datos
+        con terceros, buscamos que estos solo los utilicen para los fines contratados y que los mantengan seguros.</p>
+
+      <p>Dentro de SALVADOR SV, el acceso a sus datos personales está limitado a quienes los necesitan para el desempeño
+        de su trabajo, lo que en general suele incluir a nuestros profesionales en materia legal, cumplimiento y
+        verificación de productos e identidad. Sin embargo, esta Política de Privacidad puede cambiar con el tiempo o
+        ser actualizada por lo que le recomendamos y enfatizamos revisar continuamente esta página para asegurarse que
+        está de acuerdo con dichos cambios.</p>
+
+      <h2><strong>Nuestros principales objetivos en privacidad son:</strong></h2>
+      <ul>
+        <li>La protección de sus datos personales es nuestro modo predeterminado: a menos que circunstancias
+          excepcionales requieran su divulgación, trabajamos arduamente para mantener la privacidad de sus datos
+          personales.</li>
+        <li>Mantenemos segura su información personal: no hay forma de eliminar todos los riesgos, pero nos esforzamos
+          por mantener segura su información personal.</li>
+        <li>Se respalda la transparencia y la privacidad personal: nuestra prueba de estrés y transparencia pública no
+          divulga sus datos personales.</li>
+      </ul>
+
+      <p>Por ese motivo, procesamos sus datos personales de manera adecuada y lícita, de conformidad con la Ley de
+        Protección de Datos (la “Ley”), que puede ser modificada de vez en cuando, y las leyes subsidiarias del
+        Reglamento General de Protección de Datos (Reglamento) y reglamentos dictados al amparo de la misma.</p>
+
+      <p>El propósito de esta Política es proporcionar información sobre cómo SALVADOR SV recopila y procesa sus datos
+        personales en los escenarios de nuestro portal (es decir, a través del uso del Sitio, la Plataforma y nuestros
+        servicios relacionados, incluida cualquier información que nos pueda proporcionar o que podamos recibir).</p>
+
+      <p>El Sitio y la Plataforma no están destinados a menores y no recopilamos a sabiendas datos personales
+        relacionados con menores. Es importante que lea esta Política junto con cualquier otro aviso o política de
+        privacidad que podamos proporcionarle en ocasiones específicas cuando recopilamos o procesamos sus datos
+        personales para que tenga pleno conocimiento de cómo y por qué usamos sus datos.</p>
+
+      <h2><strong>CÓMO RECOPILAMOS INFORMACIÓN SOBRE USTED</strong></h2>
+      <p>Recopilamos información sobre usted cuando se registra o utiliza nuestro Servicio. En el momento del registro,
+        podemos solicitarle información detallada, incluido su nombre, dirección de correo electrónico, dirección
+        postal, número de teléfono, documento oficial de identidad u otra información. También podemos solicitar y
+        recibir información sobre usted de otras fuentes, o utilizar dichas fuentes para confirmar la información que
+        nos proporciona.</p>
+
+      <h2><strong>PRIVACIDAD DE LOS NIÑOS:</strong></h2>
+      <p>Debe tener 18 años de edad o más para utilizar el Servicio. No solicitamos ni recopilamos a sabiendas ninguna
+        información de niños menores de 18 años. Si descubrimos que alguien menor de 18 años nos ha proporcionado
+        información personal, la eliminaremos.</p>
+
+      <h2><strong>CÓMO USAMOS TU INFORMACIÓN PERSONAL</strong></h2>
+      <p>Usamos su información personal para: operar, mantener y mejorar nuestro Servicio; responder preguntas, así como
+        brindar asistencia a nuestros clientes; enviar información, incluyendo confirmaciones, facturas, notas técnicas,
+        actualizaciones, alertas de seguridad, así como mensajes administrativos y de soporte; comunicar sobre
+        promociones, eventos y otras noticias sobre productos y servicios ofrecidos por nosotros o nuestros afiliados;
+        vincular o combinar la información del usuario con otros datos personales; proteger, investigar o disuadir de
+        actividades fraudulentas, no autorizadas o ilegales; y ofrecer y prestar el Servicio.</p>
+
+      <p>Si se registra o utiliza nuestro Servicio, nosotros, o los afiliados, socios y/o proveedores que actúen en
+        nuestro nombre, podemos recopilar los siguientes tipos de información:</p>
+
+      <ul>
+        <li>Información de contacto: Su nombre, dirección, número de teléfono, dirección de correo electrónico y otra
+          información similar.</li>
+        <li>Información de verificación de identidad: podemos solicitarle información adicional que podemos usar y
+          proporcionar a socios y/o proveedores que actúan en nuestro nombre para verificar su identidad. Esta
+          información puede incluir su fecha de nacimiento, número de identificación fiscal o gubernamental, una copia
+          de su documento de identificación nacional u otros datos personales. También podemos obtener información sobre
+          usted de terceros, como agencias de crédito y servicios de verificación de identidad.</li>
+        <li>También podemos recopilar información adicional que puede divulgar a nuestro equipo de soporte para miembros
+          para resolver cualquier problema que nos informe.</li>
+      </ul>
+
+      <h2><strong>CÓMO PROTEGEMOS SU INFORMACIÓN PERSONAL</strong></h2>
+      <p>Si bien no se garantiza que ningún sistema en línea o electrónico sea seguro, tomamos medidas razonables para
+        ayudar a proteger su información contra pérdida, robo, uso indebido y acceso no autorizado, divulgación,
+        alteración y destrucción.</p>
+
+      <p>Hemos implementado procedimientos para hacer frente a cualquier sospecha de violación de datos personales y le
+        notificaremos a usted y a los reguladores correspondientes de una violación en la que estamos legalmente
+        obligados a hacerlo.</p>
+
+      <p>Almacenamos y procesamos su información personal y transaccional en nuestros servidores y dondequiera que se
+        encuentren nuestras subsidiarias, socios o proveedores, y protegemos dicha información a través de medidas de
+        seguridad físicas, electrónicas y de procedimiento, incorporando tecnologías de seguridad comprobadas, de
+        conformidad con la ley aplicable. Podemos utilizar medidas de seguridad informática como cortafuegos y
+        encriptación de datos, hacer cumplir los controles de acceso físico y autorizar el acceso a su información
+        personal solo a aquellas personas que necesitan dicho acceso para realizar su trabajo. Aquellas personas que
+        tienen acceso a su información personal pasan un examen detallado, son reevaluadas periódicamente y deben
+        mantener la coherencia de la información personal de todos los miembros. Existen riesgos de seguridad.</p>
+
+      <p>Almacenamos la información personal de forma segura y la conservaremos durante el tiempo que sea necesario para
+        mantener el Servicio, cumplir con nuestras obligaciones legales y/o resolver disputas.</p>
+
+      <h2><strong>DIVULGACIÓN DE SU INFORMACIÓN PERSONAL</strong></h2>
+      <p>No vendemos, intercambiamos ni transferimos su información personal a terceros. Nuestros acuerdos con terceros
+        que tienen acceso a su información personal generalmente requieren que mantengan su información personal segura
+        y que la eliminen cuando ya no sea necesario acceder a ella. Revisamos periódicamente las prácticas de seguridad
+        y confidencialidad de los terceros a quienes confiamos su información personal. También podemos divulgar su
+        información a las autoridades encargadas de hacer cumplir la ley cuando creamos que es apropiado para cumplir
+        con la ley, cumplir con nuestros términos y políticas, o proteger los derechos, la propiedad o la seguridad de
+        SALVADOR SV, nuestros clientes u otros. Tenemos a disposición del público una serie de pautas para colaborar con
+        los agentes del orden.</p>
+
+      <p>Podemos compartir su información personal de la siguiente manera:</p>
+
+      <ul>
+        <li>Con su consentimiento;</li>
+        <li>Para cumplir con las leyes aplicables;</li>
+        <li>Para responder a solicitudes y procesos legales;</li>
+        <li>Para proteger nuestros derechos, los derechos de nuestros afiliados, socios o proveedores, los derechos de
+          otros clientes y otros. Esto incluye, pero no se limita a, la divulgación que podamos necesitar para hacer
+          cumplir nuestros acuerdos, términos y políticas;</li>
+        <li>En caso de emergencia. Esto incluye proteger la seguridad de nuestros empleados y agentes, nuestros miembros
+          u otros;</li>
+        <li>A ciertos empleados, afiliados y proveedores, cuando sea necesario para su trabajo;</li>
+        <li>En su caso, con entidades con las que nos fusionemos o adquiramos. (Si esto ocurriera, requeriríamos que la
+          nueva entidad combinada siga esta Política con respecto a su información personal y le informaremos sobre
+          cualquier cambio sustancial).</li>
+      </ul>
+
+      <h2><strong>RETENCIÓN DE DATOS</strong></h2>
+      <p>¿Cuánto tiempo usarán mis datos personales? Solo conservaremos sus datos personales durante el tiempo que sea
+        necesario para cumplir con los fines que recopilamos (es decir, la prestación de servicios continuos) y,
+        posteriormente, para cumplir con los requisitos u obligaciones legales, contables, fiscales y de notificación a
+        los que pueda estar sujeto y /o en la medida en que también tengamos que conservar sus datos personales para
+        hacer cumplir, ejercer o defender posibles reclamaciones legales futuras contra usted o de otra manera.</p>
+
+      <p>En general, nuestra retención de sus datos personales no excederá el período de cinco (5) años a partir de la
+        fecha de terminación de su relación con nosotros (que normalmente surgiría del cierre/cancelación del registro
+        de su cuenta en la Plataforma) . Este plazo de conservación nos permite utilizar los datos en cuestión para la
+        posible interposición, ejercicio o defensa de reclamaciones legales (teniendo en cuenta el plazo de prescripción
+        y plazos de prescripción aplicables). Sin embargo, en ciertos casos, es posible que debamos conservar sus datos
+        durante un período de hasta diez (10) años para cumplir con las leyes fiscales y contables aplicables (esto
+        consistirá principalmente en sus Datos de transacción).</p>
+
+      <h2><strong>INFORMACIÓN DEL CONTACTO</strong></h2>
+      <p>Si tiene alguna pregunta con respecto a esta Política de datos y privacidad, puede comunicarse con nosotros
+        utilizando la información a continuación.</p>
+
+      <p>Póngase en contacto en línea: <a href="https://salvadorsv.website/">enlace a la página de contacto</a> o por
+        correo electrónico: <a href="mailto:Contacto@SalvadorSv.com">Contacto@SalvadorSv.com</a></p>
+
+    </main>
+    <footer>
+      <p><strong>Atentamente, SalvadorSv</strong></p>
+    </footer>
+  </div>
+</p-dialog>

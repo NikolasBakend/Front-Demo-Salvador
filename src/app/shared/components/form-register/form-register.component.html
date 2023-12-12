@@ -1,0 +1,65 @@
+<p-toast></p-toast>
+<section>
+
+  <div class="form-box">
+    <div class="form-value">
+      <div class="flex justify-content-center flex-wrap card-container">
+        <div class="text-center mb-1">
+          <img src="assets/layout/images/login/logo_salvador.jpg" alt="Image" height="50">
+
+          <div class="text-700 text-3xl font-medium mb-3">¡Bienvenido!</div>
+
+        </div>
+
+        <form [formGroup]="formRegister" (ngSubmit)="sendDataRegister()">
+          <div class="col-12 md:col-12 lg:col-12">
+            <div class="inputbox">
+              <ion-icon name="person-circle-outline"></ion-icon>
+              <input type="text" formControlName="nameUser" placeholder="Escribe el nombre de usuario" id="nombre1"
+                minlength="3" maxlength="60"
+                onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"
+                [ngClass]="{ 'invalid-input': formRegister.get('nameUser')?.invalid && formRegister.get('nameUser')?.touched }">
+              <label>Nombre de usuario</label>
+              <div
+                *ngIf="formRegister.get('nameUser')?.invalid && (formRegister.get('nameUser')?.dirty || formRegister.get('nameUser')?.touched)">
+                <span *ngIf="formRegister.get('nameUser')?.errors?.['required']">El campo de nombre es
+                  obligatorio.</span>
+                <span *ngIf="formRegister.get('nameUser')?.errors?.['minlength']">El nombre debe tener al menos 3
+                  caracteres.</span>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="col-12 md:col-12 lg:col-12">
+            <label class="p-label">Ingresa la contraseña</label>
+            <p-password formControlName="pass" id="password1" [feedback]="false" placeholder="Contraseña"
+              [toggleMask]="true">
+            </p-password>
+            <div
+              *ngIf="formRegister.get('pass')?.invalid && (formRegister.get('pass')?.dirty || formRegister.get('pass')?.touched)">
+              <span *ngIf="formRegister.get('pass')?.errors?.['required']">La contraseña es obligatoria.</span>
+            </div>
+          </div>
+
+          <br>
+
+          <div class="flex align-items-center justify-content-between mb-6">
+            <button class="button" type="submit" [disabled]="!formRegister.valid"
+              [ngClass]="{ 'invalid-button': formRegister.invalid }">
+              ¡Ingresar!
+            </button>
+          </div>
+
+        </form>
+
+        <div class="flex align-items-center justify-content-between mb-6">
+          <h1 class="register-label">Aún no posees cuenta con nosotros
+            <button type="button" class="button-link" (click)="register()">¡Registrate!</button>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+<div class="card">
+  <p-table [value]="transfersSents" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <th>Id</th>
+              <th>Criptomoneda</th>
+              <th>Cantidad</th>
+              <th>Fecha de creación</th>
+              <th>Estado</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-transfersSent let-columns="columns">
+          <tr>
+              <td>{{transfersSent.id}}</td>
+              <td>{{transfersSent.asset}}</td>
+              <td>{{transfersSent.amount}}</td>
+              <td>{{transfersSent.transformed_date}}</td>
+              <td><p-tag [value]="transfersSent.status" [severity]="getSeverity(transfersSent.status)"></p-tag></td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>

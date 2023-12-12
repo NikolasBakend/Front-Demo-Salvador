@@ -1,0 +1,178 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'poppins',sans-serif;
+}
+section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+
+  /* background: url('../../../../assets/layout/images/login/paisaje.jpg')no-repeat; */
+  background: rgb(0,55,89);
+  background: linear-gradient(37deg, rgba(0,55,89,1) 9%, rgba(194,23,36,1) 92%); margin-right: 10px;
+  background-position: center;
+  background-size: cover;
+}
+.form-box{
+  position: fixed;
+  width: 400px;
+  height: 600px;
+  background: white;
+  border: 2px solid rgba(245, 219, 219, 0.5);
+  border-radius: 20px;
+  /* backdrop-filter: blur(15px); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mb-1 {
+  margin-bottom: -0.25rem !important;
+}
+
+h2{
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+.inputbox{
+  position: relative;
+  margin: 30px 0;
+  /* border-bottom: 2px solid rgb(122, 43, 247); */
+}
+
+
+
+.inputbox label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: #311557;
+  font-size: 1em;
+  pointer-events: none;
+  transition: .5s;
+}
+input:focus ~ label,
+input:valid ~ label,
+input:invalid ~ label {
+top: -5px;
+position: absolute;
+}
+.inputbox input {
+  width: 242px;
+  height: 50px;
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid rgb(3, 65, 104);
+  outline: none;
+  font-size: 1em;
+  padding:0 35px 0 5px;
+  color: #311557;
+}
+
+
+.p-label{
+  display:block;
+  margin-top: 13px;
+  color: #311557;
+  margin-left: 5px;
+}
+
+.inputbox ion-icon{
+  position: absolute;
+  right: 6px;
+  color: rgb(125 125 125);
+  font-size: 1.2em;
+  top: 20px;
+  align-items: center;
+}
+.forget{
+  margin: -15px 0 15px ;
+  font-size: .9em;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.forget label input{
+  margin-right: 3px;
+
+}
+.forget label a{
+  color: #fff;
+  text-decoration: none;
+}
+.forget label a:hover{
+  text-decoration: underline;
+}
+.button{
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background: rgb(122, 43, 247);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  color:#fff
+}
+.register{
+  font-size: .9em;
+  color: #fff;
+  text-align: center;
+  margin: 25px 0 10px;
+}
+.register p a{
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+}
+.register p a:hover{
+  text-decoration: underline;
+}
+
+.invalid-input{
+  border-bottom: 2px solid red!important;
+}
+
+span{
+  color: red;
+  font-size: small;
+  word-wrap: break-word;
+}
+
+.invalid-button{
+  background-color: rgb(226, 226, 226);
+  color: rgb(177, 177, 177);
+  cursor: not-allowed; /* Cambiar el cursor para cuando el botón está deshabilitado */
+}
+
+.button-link {
+  background: none;
+  font-size: 16px;
+  border: none;
+  color: rgb(4, 83, 133);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.register-label {
+    font-size: .9em;
+    color: #3a3636;
+    text-align: center;
+    margin: -25px 50px;
+    word-wrap: break-word;
+}
+

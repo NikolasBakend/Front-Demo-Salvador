@@ -1,0 +1,85 @@
+<p-toast></p-toast>
+<br>
+<section style="width: 100%;">
+  <h1><b>Documentos requeridos</b></h1>
+  <br>
+  <form [formGroup]="formDocuments">
+    <div class="grid">
+      <div class="col-12 md:col-12 lg:col-12">
+        <div class="inputbox">
+          <input type="text" formControlName="fullname" placeholder="Escribe tu nombre completo" id="fullname" pattern="^[A-Za-z\s]+$"
+            minlength="3" maxlength="60"
+            [ngClass]="{ 'invalid-input': formDocuments.get('fullname')?.invalid && formDocuments.get('fullname')?.touched }">
+          <label>Nombre Completo</label>
+          <div
+            *ngIf="formDocuments.get('fullname')?.invalid && (formDocuments.get('fullname')?.dirty || formDocuments.get('fullname')?.touched)">
+            <span *ngIf="formDocuments.get('fullname')?.errors?.['required']">El campo de nombre es
+              obligatorio.</span>
+            <span *ngIf="formDocuments.get('fullname')?.errors?.['pattern']">El campo debe contener solo
+              letras.</span>
+            <span *ngIf="formDocuments.get('fullname')?.errors?.['minlength']">El nombre debe tener al menos 3
+              caracteres.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+
+
+  <div class="grid">
+    <div class="col-12 md:col-12 lg:col-12">
+
+      <p-fieldset [toggleable]="true">
+
+        <ng-template pTemplate="header">
+          <div class="flex align-items-center">
+            <span class="pi pi-file-pdf mr-2" [ngStyle]="{color: 'var(--blue-800)'}"></span>
+            <span class="font-bold text-lg" [ngStyle]="{color: 'var(--blue-800)'}">Documentos para verificación</span>
+          </div>
+        </ng-template>
+
+        <div class="grid">
+          <div class="contentCenter">
+            <img src="/assets/layout/images/documentsCheck.svg" alt="Imagen" width="48px" height="38px">
+          </div>
+          <div class="col-5 inputbox">
+            <ul>
+              <li>Permiso para retiros o WITHDRWAL en PDF que sea legible .</li>
+              <li>Imagen de ID pasaporte.</li>
+              <li>Selfi con pasaporte.</li>
+              <li>Factura en PDF que corrobore su dirección.</li>
+            </ul>
+          </div>
+          <div class="col-6 inputbox">
+            <p-fileUpload name="doc1[]" url="https://www.primefaces.org/cdn/api/upload.php"
+              (onUpload)="onUpload1($event)" [multiple]="true" accept="application/pdf" [maxFileSize]="3000000"
+              chooseLabel="Cargar" uploadLabel="Subir" [fileLimit]="4" [ariaValueMin]="1"
+              invalidFileSizeMessageDetail="'El tamaño máximo de carga es de 3 MB.'" cancelLabel="Cancelar"
+              invalidFileLimitMessageSummary="Se superó el número maximo de archivos"
+              invalidFileLimitMessageDetail="el limite es 4 documentos">
+              <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFilesPersonal.length">
+                  <li *ngFor="let file of uploadedFilesPersonal">{{ file.name }} - {{ file.size }} bytes</li>
+                </ul>
+              </ng-template>
+            </p-fileUpload>
+          </div>
+        </div>
+
+      </p-fieldset>
+
+    </div>
+
+  </div>
+</section>
+
+<br>
+<div class="grid justify-content-center">
+  <div class="col">
+  </div>
+  <div class="col-fixed">
+    <p-button label="Siguiente" (onClick)="sendDataDocuments()" icon="pi pi-angle-right" iconPos="right">
+    </p-button>
+  </div>
+</div>

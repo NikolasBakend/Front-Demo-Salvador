@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+<div class="html">
+  <div class="body" id="top">
+    <p-menubar>
+      <ng-template pTemplate="start">
+        <a href="#"><img src="../../../../assets/layout/images/login/logo_salvador.jpg" class="logo" /></a>
+      </ng-template>
+      <ng-template pTemplate="end">
+        <a href="#" class="btn btn-primary">
+          <i class="pi pi-user"></i>
+          Login
+        </a>
+      </ng-template>
+    </p-menubar>
+    <!-- Stepper -->
+
+    <main>
+      <section class="section features" id="features" aria-label="features">
+        <p class="section-subtitle">Registrate con salvador</p>
+        <h4 class="section-title">¡Estas muy cerca de lograrlo!</h4>
+        <div class="container">
+          <div class="card flex justify-content-center">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>

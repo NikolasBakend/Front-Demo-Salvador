@@ -1,0 +1,22 @@
+<div class="card">
+  <p-table [value]="depositos" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header" let-columns>
+          <tr>
+              <th>Id</th>
+              <th>Criptomoneda</th>
+              <th>Cantidad</th>
+              <th>Fecha de creación</th>
+              <th>Estado</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-deposito let-columns="columns">
+          <tr>
+              <td>{{deposito.id}}</td>
+              <td>{{deposito.asset}}</td>
+              <td>{{deposito.amount}}</td>
+              <td>{{deposito.transformed_date}}</td>
+              <td><p-tag [value]="deposito.status" [severity]="getSeverity(deposito.status)"></p-tag></td>
+          </tr>
+      </ng-template>
+  </p-table>
+</div>
