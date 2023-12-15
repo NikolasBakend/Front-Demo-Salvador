@@ -168,7 +168,7 @@ export class InfoPersonComponent implements OnInit {
               summary: 'Información personal guardada con éxito',
             });
             this.formRegisterPersonal.reset();
-            setTimeout(() => this.router.navigateByUrl('/login'), 500);
+            setTimeout(() => this.router.navigateByUrl('/informacion-cliente/verificacion'), 500);
           } else {
             this.messageService.add({
               severity: 'error',
