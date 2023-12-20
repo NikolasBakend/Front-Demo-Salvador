@@ -13,23 +13,23 @@ export class TransfersService {
   // Método para obtener datos de transaciones
   getTransactions(): Observable<any> {
     const url = `${this.baseUrl}/get-deposits`;
-    return this.http.get(url);
+    return this.http.get(url, { withCredentials: true });
   }
 
   // Método para obtener datos de retiros
   getWithdrawals(): Observable<any> {
     const url = `${this.baseUrl}/get-withdrawals`;
-    return this.http.get(url);
+    return this.http.get(url, { withCredentials: true });
   }
   // Método para obtener datos  de transaciones recibidas
   getTransactionsReceived(): Observable<any> {
     const url = `${this.baseUrl}/get-received-transactions`;
-    return this.http.get(url);
+    return this.http.get(url, { withCredentials: true });
   }
 
   //Metodo para obtener datos de transaciones enviadas
   getTransactionsSent():  Observable<any> {
     const url = `${this.baseUrl}/get-send-transactions`;
-    return this.http.get(url);
+    return this.http.get(url, { withCredentials: true });
   }
 }

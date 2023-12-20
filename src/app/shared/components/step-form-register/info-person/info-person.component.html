@@ -81,13 +81,8 @@
       <div class="col-12 md:col-6 lg:col-4">
         <div class="inputbox">
           <input type="text" formControlName="passport" placeholder="Escribe tu numero de pasaporte" id="pasaporte"
-            maxlength="100"
-            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('passport')?.invalid && formRegisterPersonal.get('passport')?.touched }">
-          <label>Pasaporte</label>
-          <div
-            *ngIf="formRegisterPersonal.get('passport')?.invalid && (formRegisterPersonal.get('passport')?.dirty || formRegisterPersonal.get('passport')?.touched)">
-            <span *ngIf="formRegisterPersonal.get('passport')?.errors?.['required']">El pasaporte es obligatorio.</span>
-          </div>
+            maxlength="100">
+          <label>Pasaporte (opcional)</label>
         </div>
       </div>
 
