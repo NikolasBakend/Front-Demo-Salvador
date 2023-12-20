@@ -248,7 +248,19 @@
         </div>
       </div>
 
+      <div class="col-12 md:col-12 lg:col-12">
+        <p-messages severity="info">
+          <ng-template pTemplate>
+            <h1 class="terminos-label">
+              Activa tu registro en nuestra<a class="button-link"
+                href="https://wa.link/salvadorsv" target="_blank"> billetera conversacional</a>
+            </h1>
+          </ng-template>
+        </p-messages>
+      </div>
+
     </div>
+
     <div class="grid grid-nogutter justify-content-end">
       <p-button label="Verifícate" (onClick)="sendDataPersonal()" icon="pi pi-angle-right" iconPos="right"
        [disabled]="formRegisterPersonal.invalid">
