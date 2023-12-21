@@ -7,6 +7,7 @@ import { Table } from 'primeng/table'
 import { Column } from 'src/app/domain/models/column';
 import { ExportColumn } from 'src/app/domain/models/export';
 import { TransfersService } from 'src/app/services/apiTransfers/transfers.service';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class DetaildepositoComponent {
   // private depositoService: TransfersService
   //private depositoservices: DepositosMockService
   constructor(
-
+     private localStorage: LocalStorageService,
      private depositoService: TransfersService,
      private messageService: MessageService,)
      {

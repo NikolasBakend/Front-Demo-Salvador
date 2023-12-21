@@ -4,6 +4,7 @@ import { Table } from 'primeng/table';
 import { Column } from 'src/app/domain/models/column';
 import { TransfersClient } from 'src/app/domain/models/transfers-clients';
 import { TransfersService } from 'src/app/services/apiTransfers/transfers.service';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
 
 @Component({
   selector: 'app-detail-withdrawals',
@@ -20,6 +21,7 @@ export class DetailWithdrawalsComponent {
 
   constructor(
      private retiroService: TransfersService,
+     private localStorage: LocalStorageService,
      private messageService: MessageService,)
      {
 
