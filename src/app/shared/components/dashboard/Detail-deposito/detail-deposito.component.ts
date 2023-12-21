@@ -28,7 +28,7 @@ export class DetaildepositoComponent {
   // private depositoService: TransfersService
   //private depositoservices: DepositosMockService
   constructor(
-     private localStorage: LocalStorageService,
+     private localStorageService: LocalStorageService,
      private depositoService: TransfersService,
      private messageService: MessageService,)
      {
@@ -36,20 +36,34 @@ export class DetaildepositoComponent {
       }
 
   ngOnInit() {
-    this.getDataTable();
+    this.getUserApiKey();
 
   }
 
-  getDataTable() {
+  getUserApiKey(){
+    // Se obtiene el userApiKey del LocalStorage
+  const userApiKey = this.localStorageService.getItem('userApiKey');
+  if (userApiKey) {
+    this.getDataTable(userApiKey);
+  } else {
+    console.error('userApiKey no encontrado en el LocalStorage');
+  }
+  }
 
-    this.depositoService.getTransactions().subscribe(
-      {
-        next: data => {
-          this.depositos = data
-        }, error: e => {
-          this.messageService.add({ severity: 'error', summary: 'Error consultando el historico de depositos', detail: 'Comuniquese con soporte', life: 2000 });
-        }
-      });
+  getDataTable(userApiKey: string) {
+    this.depositoService.getTransactions(userApiKey).subscribe({
+      next: data => {
+        this.depositos = data;
+      },
+      error: e => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error consultando el historico de depositos',
+          detail: 'Comuniquese con soporte',
+          life: 2000
+        });
+      }
+    });
   }
 
 

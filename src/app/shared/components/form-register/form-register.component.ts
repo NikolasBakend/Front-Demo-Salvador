@@ -21,7 +21,7 @@ export class FormRegisterComponent {
     private formBuilder: FormBuilder,
     private messageService: MessageService,
     private loginService: LoginService,
-    private localStorage: LocalStorageService,
+    private localStorageService: LocalStorageService,
     private router: Router,)
     {
       this.loginForm();
@@ -57,6 +57,9 @@ export class FormRegisterComponent {
           severity: 'success',
           summary: 'Información guardada correctamente',
         });
+
+        // Guardar userApiKey en LocalStorage
+        this.localStorageService.setItem('userApiKey', response.userApiKey);
 
         this.formRegister.reset();
         setTimeout(() => this.router.navigateByUrl('/dashboard'), 500);

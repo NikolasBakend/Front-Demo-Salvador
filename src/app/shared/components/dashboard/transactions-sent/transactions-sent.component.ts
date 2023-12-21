@@ -21,27 +21,42 @@ export class TransactionsSentComponent {
 
   constructor(
      private enviadasService: TransfersService,
-     private localStorage: LocalStorageService,
+     private localStorageService: LocalStorageService,
      private messageService: MessageService,)
      {
 
       }
 
-  ngOnInit() {
-    this.getDataTable();
+      ngOnInit() {
+        this.getUserApiKey();
+      }
 
-  }
+      getUserApiKey(){
+        // Se obtiene el userApiKey del LocalStorage
+      const userApiKey = this.localStorageService.getItem('userApiKey');
+      if (userApiKey) {
+        this.getDataTable(userApiKey);
+      } else {
+        console.error('userApiKey no encontrado en el LocalStorage');
+      }
+      }
 
-  getDataTable() {
-    this.enviadasService.getTransactionsSent().subscribe(
-      {
-        next: data => {
-          this.transfersSents = data
-        }, error: e => {
-          this.messageService.add({ severity: 'error', summary: 'Error consultando el historico de transferencias enviadas', detail: 'Comuniquese con soporte', life: 2000 });
-        }
-      });
-  }
+      getDataTable(userApiKey: string) {
+        this.enviadasService.getTransactionsSent(userApiKey).subscribe({
+          next: data => {
+            this.transfersSents = data;
+          },
+          error: e => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error consultando el historico de transferencias enviadas',
+              detail: 'Comuniquese con soporte',
+              life: 2000
+            });
+          }
+        });
+      }
+
 
 
   applyFilterGlobal($event, stringVal) {

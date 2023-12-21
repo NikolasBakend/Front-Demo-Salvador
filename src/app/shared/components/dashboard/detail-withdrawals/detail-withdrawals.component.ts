@@ -21,26 +21,40 @@ export class DetailWithdrawalsComponent {
 
   constructor(
      private retiroService: TransfersService,
-     private localStorage: LocalStorageService,
+     private localStorageService: LocalStorageService,
      private messageService: MessageService,)
      {
 
       }
 
   ngOnInit() {
-    this.getDataTable();
-
+    this.getUserApiKey();
   }
 
-  getDataTable() {
-    this.retiroService.getWithdrawals().subscribe(
-      {
-        next: data => {
-          this.withdrawals = data
-        }, error: e => {
-          this.messageService.add({ severity: 'error', summary: 'Error consultando el historico de retiros', detail: 'Comuniquese con soporte', life: 2000 });
-        }
-      });
+  getUserApiKey(){
+    // Se obtiene el userApiKey del LocalStorage
+  const userApiKey = this.localStorageService.getItem('userApiKey');
+  if (userApiKey) {
+    this.getDataTable(userApiKey);
+  } else {
+    console.error('userApiKey no encontrado en el LocalStorage');
+  }
+  }
+
+  getDataTable(userApiKey: string) {
+    this.retiroService.getWithdrawals(userApiKey).subscribe({
+      next: data => {
+        this.withdrawals = data;
+      },
+      error: e => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error consultando el historico de depositos',
+          detail: 'Comuniquese con soporte',
+          life: 2000
+        });
+      }
+    });
   }
 
 
