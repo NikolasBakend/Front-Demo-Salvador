@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
 
 @Component({
   selector: 'app-menu',
@@ -12,7 +13,7 @@ export class MenuComponent {
   items : MenuItem[];
   displaySidebar = false;
 
-  constructor(){
+  constructor(private localStorageService: LocalStorageService, ){
 
   }
 
@@ -23,5 +24,9 @@ export class MenuComponent {
 
   efectos(){
     this.isClassEnabled = !this.isClassEnabled;
+}
+
+logout(){
+  this.localStorageService.removeItem('userApiKey');
 }
 }
