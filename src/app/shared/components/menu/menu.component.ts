@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 
@@ -13,7 +14,9 @@ export class MenuComponent {
   items : MenuItem[];
   displaySidebar = false;
 
-  constructor(private localStorageService: LocalStorageService, ){
+  constructor(
+    private localStorageService: LocalStorageService,
+    private router: Router){
 
   }
 
@@ -28,5 +31,6 @@ export class MenuComponent {
 
 logout(){
   this.localStorageService.removeItem('userApiKey');
+  setTimeout(() => this.router.navigateByUrl('/login'), 500);
 }
 }
