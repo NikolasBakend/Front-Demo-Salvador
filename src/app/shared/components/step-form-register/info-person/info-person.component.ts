@@ -41,6 +41,7 @@ export class InfoPersonComponent implements OnInit {
   ngOnInit() {
     this.formPersonal();
     this.minMaxDate();
+    this.validFields();
   }
 
   validTerminos() {
@@ -53,14 +54,14 @@ export class InfoPersonComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/), Validators.minLength(3)]],
       docType: ['', [Validators.required]],
       identification: ['', [Validators.required, Validators.minLength(8)]],
-      country: ['', null],
-      city: ['', null],
+      codeCountry: ['', [Validators.required]],
+      city: ['', [Validators.required]],
       address: ['', [Validators.required]],
       passport: ['', null],
       celphoneNumber: ['', [Validators.required, Validators.minLength(10)]],
       email: ['', [Validators.required, Validators.email]],
       acceptTerm: ['', [Validators.required]],
-      codePhone: ['', null],
+      codePhone: ['', [Validators.required]],
       codeMoney: ['', [Validators.required]],
       userName: ['', [Validators.required, Validators.minLength(3)]],
       pass: ['', [Validators.required, Validators.minLength(8)]],
@@ -137,7 +138,14 @@ export class InfoPersonComponent implements OnInit {
   }
 
   sendDataPersonal() {
-    if (this.formRegisterPersonal.valid) {
+
+    if(this.formRegisterPersonal.invalid){
+      this.messageService.add({
+        severity: 'warn',
+        summary: '¡Aviso importante!',
+        detail: 'Recuerda que debes diligenciar los campos obligatorios y aceptar política de datos'
+      });
+    }else if (this.formRegisterPersonal.valid) {
       const dataToSend = {
         nameUser: this.formRegisterPersonal.get('nameUser')?.value,
         identification: this.formRegisterPersonal.get('identification')?.value,
@@ -189,5 +197,9 @@ export class InfoPersonComponent implements OnInit {
     const day = dateObj.getDate().toString().padStart(2, '0');
 
     return `${year}-${month}-${day}`;
+  }
+
+  validFields(){
+    this.formRegisterPersonal.markAllAsTouched();
   }
 }
