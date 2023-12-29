@@ -3,9 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from 'src/app/services/apiRegister/register.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
-import { LocalStorageService } from 'src/app/services/localStorage.service';
 import { ApiDropDownService } from 'src/app/services/apiDropDown/drop-down.service';
-import { async, asyncScheduler, lastValueFrom } from 'rxjs';
+
 
 @Component({
   selector: 'app-info-person',
@@ -114,6 +113,7 @@ export class InfoPersonComponent implements OnInit {
     this.dropDownService.getCountryCodes().subscribe({
       next: countryCodesData => {
         this.countryCodes = countryCodesData;
+
       },
       error: error => {
         this.messageService.add({
@@ -146,6 +146,7 @@ export class InfoPersonComponent implements OnInit {
         detail: 'Recuerda que debes diligenciar los campos obligatorios y aceptar política de datos'
       });
     }else if (this.formRegisterPersonal.valid) {
+
       const dataToSend = {
         nameUser: this.formRegisterPersonal.get('nameUser')?.value,
         identification: this.formRegisterPersonal.get('identification')?.value,
@@ -166,7 +167,7 @@ export class InfoPersonComponent implements OnInit {
         email: this.formRegisterPersonal.get('email')?.value,
       }
 
-
+      debugger
       this.apiService.postDataUserRegister(dataToSend).subscribe(
         response => {
 
