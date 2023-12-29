@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { interval, take } from 'rxjs';
 import { LocalStorageService } from 'src/app/services/localStorage.service';
 
 @Component({
@@ -20,17 +21,30 @@ export class MenuComponent {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    // Remover 'userApiKey' después de 5 minutos
+    interval(300000)
+      .pipe(
+        take(300)
+      )
+      .subscribe(() => {
+        this.removerUserApiKey();
+      });
+  }
 
-}
+  private removerUserApiKey(): void {
+    localStorage.removeItem('userApiKey');
+    this.router.navigateByUrl('/login');
+  }
 
-
-  efectos(){
+  efectos() {
     this.isClassEnabled = !this.isClassEnabled;
-}
+  }
 
-logout(){
-  this.localStorageService.removeItem('userApiKey');
-  setTimeout(() => this.router.navigateByUrl('/login'), 500);
-}
+  logout() {
+    this.localStorageService.removeItem('userApiKey');
+    setTimeout(() => this.router.navigateByUrl('/login'), 500);
+  }
+
+
 }
