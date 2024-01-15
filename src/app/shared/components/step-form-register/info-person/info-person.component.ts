@@ -167,7 +167,7 @@ export class InfoPersonComponent implements OnInit {
         email: this.formRegisterPersonal.get('email')?.value,
       }
 
-      debugger
+
       this.apiService.postDataUserRegister(dataToSend).subscribe(
         response => {
 
@@ -177,7 +177,7 @@ export class InfoPersonComponent implements OnInit {
               summary: 'Información personal guardada con éxito',
             });
             this.formRegisterPersonal.reset();
-            setTimeout(() => this.router.navigateByUrl('/informacion-cliente/verificacion'), 500);
+            setTimeout(() => this.router.navigateByUrl('/login'), 1000);
           } else {
             this.messageService.add({
               severity: 'error',
