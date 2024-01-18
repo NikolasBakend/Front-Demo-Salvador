@@ -57,7 +57,7 @@ export class InfoPersonComponent implements OnInit {
       city: ['', [Validators.required]],
       address: ['', [Validators.required]],
       passport: ['', null],
-      celphoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+      celphoneNumber: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.required, Validators.email]],
       acceptTerm: ['', [Validators.required]],
       codePhone: ['', [Validators.required]],
