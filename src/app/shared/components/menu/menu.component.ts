@@ -24,9 +24,6 @@ export class MenuComponent {
   ngOnInit(): void {
     // Remover 'userApiKey' después de 5 minutos
     interval(300000)
-      .pipe(
-        take(300)
-      )
       .subscribe(() => {
         this.removerUserApiKey();
       });
