@@ -117,7 +117,19 @@ position: absolute;
   width: 100%;
   height: 40px;
   border-radius: 40px;
-  background: rgb(122, 43, 247);
+  background: rgba(170,27,43,255);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  color:#fff
+}
+.buttonRegister{
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background: rgba(28,50,81,255);
   border: none;
   outline: none;
   cursor: pointer;
