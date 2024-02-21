@@ -42,7 +42,7 @@ import { LocalStorageService } from '../services/localStorage.service';
 import { MessageLocalService } from '../services/messageLocal.service';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { MenuComponent } from './components/menu/menu.component';
+import { MenuComponent } from './shared/menu/menu.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule } from 'primeng/menu';
 import { PanelMenuModule } from 'primeng/panelmenu';
