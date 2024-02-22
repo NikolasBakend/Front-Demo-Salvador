@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+<body [ngClass]="{'active': isClassEnabled}">
+    <div class="wrapper">
+        <div class="section">
+            <div class="top_navbar">
+                <div class="hamburger">
+                    <button class="hamburger" id="hamburger-button" (click)="efectos()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <img src="../../../../assets/layout/images/login/logo_salvador.jpg" height="80" />
+            </div>
+            <div class="container">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="profile">
+                <img src="../../../../assets/layout/images/login/logo_salvador.jpg" alt="profile_picture">
+                <h3>Tu Dashboard</h3>
+                <p>Cliente</p>
+            </div>
+            <div class="card cardEdit flex justify-content-center">
+                <p-toast></p-toast>
+                <p-menu  [model]="items" ></p-menu>
+            </div>            
+        </div>
+
+    </div>
+</body>
