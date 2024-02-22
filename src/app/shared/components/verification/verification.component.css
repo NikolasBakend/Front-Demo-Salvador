@@ -60,3 +60,22 @@ span{
   color: red;
   font-size: small;
 }
+
+
+.terminos-label {
+  font-size: 17px;
+  font-family: 'byom',sans-serif;
+  margin-left: 25px;
+  margin-top: -25px;
+}
+
+
+.button-link {
+  background: none;
+  font-size: 17px;
+  border: none;
+  color: rgb(4, 83, 133);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}

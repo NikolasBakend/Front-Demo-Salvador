@@ -1,4 +1,3 @@
-<p-toast></p-toast>
 <br>
 <section>
   <h1><b>Ingresa tu información</b></h1>
@@ -44,8 +43,16 @@
       <div class="col-12 md:col-6 lg:col-4">
         <label class="p-label">Fecha de Nacimiento</label>
         <div class="p-fluid">
-          <p-calendar formControlName="birtDate" dateFormat="yy/mm/dd" [maxDate]="maxDate" [showIcon]="true"></p-calendar>
+          <p-calendar formControlName="birtDate" dateFormat="yy/mm/dd" [maxDate]="maxDate" [showIcon]="true"
+          [ngClass]="{ 'invalid-input': formRegisterPersonal.get('birtDate')?.invalid && formRegisterPersonal.get('birtDate')?.touched }">
+          </p-calendar>
+          <div
+          *ngIf="formRegisterPersonal.get('birtDate')?.invalid && (formRegisterPersonal.get('birtDate')?.dirty || formRegisterPersonal.get('birtDate')?.touched)">
+          <span *ngIf="formRegisterPersonal.get('birtDate')?.errors?.['required']">La fecha de nacimiento es
+            obligatoria.</span>
         </div>
+        </div>
+
       </div>
       <!-- aca va codico dropdowm -->
       <div class="col-12 md:col-6 lg:col-4">
@@ -81,13 +88,8 @@
       <div class="col-12 md:col-6 lg:col-4">
         <div class="inputbox">
           <input type="text" formControlName="passport" placeholder="Escribe tu numero de pasaporte" id="pasaporte"
-            maxlength="100"
-            [ngClass]="{ 'invalid-input': formRegisterPersonal.get('passport')?.invalid && formRegisterPersonal.get('passport')?.touched }">
-          <label>Pasaporte</label>
-          <div
-            *ngIf="formRegisterPersonal.get('passport')?.invalid && (formRegisterPersonal.get('passport')?.dirty || formRegisterPersonal.get('passport')?.touched)">
-            <span *ngIf="formRegisterPersonal.get('passport')?.errors?.['required']">El pasaporte es obligatorio.</span>
-          </div>
+            maxlength="100">
+          <label>Pasaporte (opcional)</label>
         </div>
       </div>
 
@@ -96,7 +98,7 @@
         <label class="p-label">Pais</label>
         <p-dropdown [options]="countryCodes" placeholder="Colombia" [editable]="false" optionLabel="dial_code"
           [filter]="true" filterBy="name" [showClear]="true" filterPlaceholder="Buscar opción" [(ngModel)]="country"
-          emptyFilterMessage="Sin resultados" [ngModelOptions]="{standalone: true}">
+          emptyFilterMessage="Sin resultados" [ngModelOptions]="{standalone: true}" formControlName="codeCountry">
           <ng-template pTemplate="selectedItem">
             <div class="flex align-items-center gap-2" *ngIf="country">
               <i [class]="getFlagClass(country.code)"></i>
@@ -110,12 +112,21 @@
             </div>
           </ng-template>
         </p-dropdown>
+        <div
+            *ngIf="formRegisterPersonal.get('codeCountry')?.invalid && (formRegisterPersonal.get('codeCountry')?.dirty || formRegisterPersonal.get('codeCountry')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('codeCountry')?.errors?.['required']">El pais es obligatorio.</span>
+          </div>
       </div>
 
       <div class="col-12 md:col-6 lg:col-4">
         <div class="inputbox">
-          <input type="text" formControlName="city" placeholder="Escribe tu ciudad de residencia" id="city">
+          <input type="text" formControlName="city" placeholder="Escribe tu ciudad de residencia" id="city"
+          [ngClass]="{ 'invalid-input': formRegisterPersonal.get('city')?.invalid && formRegisterPersonal.get('city')?.touched }">
           <label>Ciudad</label>
+          <div
+            *ngIf="formRegisterPersonal.get('city')?.invalid && (formRegisterPersonal.get('city')?.dirty || formRegisterPersonal.get('city')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('city')?.errors?.['required']">La ciudad es obligatoria.</span>
+          </div>
         </div>
       </div>
 
@@ -140,6 +151,10 @@
           optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" filterPlaceholder="Buscar opción"
           emptyFilterMessage="Sin resultados">
         </p-dropdown>
+        <div
+            *ngIf="formRegisterPersonal.get('codeMoney')?.invalid && (formRegisterPersonal.get('codeMoney')?.dirty || formRegisterPersonal.get('codeMoney')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('codeMoney')?.errors?.['required']">El tipo de moneda es obligatoria.</span>
+          </div>
       </div>
 
       <!-- aca va codico dropdowm -->
@@ -147,7 +162,7 @@
         <label class="p-label">Indicativo celular</label>
         <p-dropdown [options]="countryCodes" placeholder="+00" [editable]="false" optionLabel="dial_code"
           [filter]="true" filterBy="name" [showClear]="true" filterPlaceholder="Buscar opción" [(ngModel)]="codePrueba"
-          emptyFilterMessage="Sin resultados" [ngModelOptions]="{standalone: true}">
+          emptyFilterMessage="Sin resultados" [ngModelOptions]="{standalone: true}" formControlName="codePhone">
           <ng-template pTemplate="selectedItem">
             <div class="flex align-items-center gap-2" *ngIf="codePrueba">
               <i [class]="getFlagClass(codePrueba.code)"></i>
@@ -161,12 +176,16 @@
             </div>
           </ng-template>
         </p-dropdown>
+        <div
+            *ngIf="formRegisterPersonal.get('codePhone')?.invalid && (formRegisterPersonal.get('codePhone')?.dirty || formRegisterPersonal.get('codePhone')?.touched)">
+            <span *ngIf="formRegisterPersonal.get('codePhone')?.errors?.['required']">El indicativo es obligatorio.</span>
+          </div>
       </div>
 
       <div class="col-12 md:col-6 lg:col-4">
         <div class="inputbox">
           <input type="text" formControlName="celphoneNumber" placeholder="Digita tu número de celular" id="cell"
-            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" minlength="10" maxlength="15"
+            onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" minlength="8" maxlength="15"
             [ngClass]="{ 'invalid-input': formRegisterPersonal.get('celphoneNumber')?.invalid && formRegisterPersonal.get('celphoneNumber')?.touched }">
           <label>Número Celular</label>
 
@@ -174,6 +193,8 @@
             *ngIf="formRegisterPersonal.get('celphoneNumber')?.invalid && (formRegisterPersonal.get('celphoneNumber')?.dirty || formRegisterPersonal.get('celphoneNumber')?.touched)">
             <span *ngIf="formRegisterPersonal.get('celphoneNumber')?.errors?.['required']">El número de celular es
               obligatorio.</span>
+            <span *ngIf="formRegisterPersonal.get('celphoneNumber')?.errors?.['minlength']">El numero de celular debe tener al menos 8
+                caracteres.</span>
           </div>
         </div>
       </div>
@@ -248,10 +269,21 @@
         </div>
       </div>
 
+      <div class="col-12 md:col-12 lg:col-12">
+        <p-messages severity="info">
+          <ng-template pTemplate>
+            <h1 class="terminos-label">
+              ¡RECUERDA! La configuración de tu cuenta toma entre 5 a 15 minutos, luego deberás confirmar tu registro ingresando desde tu celular a tu<a class="button-link"
+                href="https://wa.link/salvadorsv"> Billetera Conversacional</a>
+            </h1>
+          </ng-template>
+        </p-messages>
+      </div>
+
     </div>
+
     <div class="grid grid-nogutter justify-content-end">
-      <p-button label="Siguiente" (onClick)="sendDataPersonal()" icon="pi pi-angle-right" iconPos="right"
-       [disabled]="formRegisterPersonal.invalid">
+      <p-button label="Regístrate" (onClick)="sendDataPersonal()" icon="pi pi-angle-right" iconPos="right">
       </p-button>
     </div>
   </form>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LoginService } from 'src/app/services/apiLogin/login.service';
+import { LocalStorageService } from 'src/app/services/localStorage.service';
 
 @Component({
   selector: 'app-form-register',
@@ -20,6 +21,7 @@ export class FormRegisterComponent {
     private formBuilder: FormBuilder,
     private messageService: MessageService,
     private loginService: LoginService,
+    private localStorageService: LocalStorageService,
     private router: Router,)
     {
       this.loginForm();
@@ -55,6 +57,9 @@ export class FormRegisterComponent {
           severity: 'success',
           summary: 'Información guardada correctamente',
         });
+
+        // Guardar userApiKey en LocalStorage
+        this.localStorageService.setItem('userApiKey', response.userApiKey);
 
         this.formRegister.reset();
         setTimeout(() => this.router.navigateByUrl('/dashboard'), 500);

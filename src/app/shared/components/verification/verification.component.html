@@ -45,10 +45,10 @@
           </div>
           <div class="col-5 inputbox">
             <ul>
-              <li>Permiso para retiros o WITHDRWAL en PDF que sea legible .</li>
-              <li>Imagen de ID pasaporte.</li>
-              <li>Selfi con pasaporte.</li>
-              <li>Factura en PDF que corrobore su dirección.</li>
+              <b>Por favor sube los documentos que corresponden a tu registro  en  PDF únicamente, asi:</b>
+              <li>Imagen de ID registraste</li>
+              <li>Selfi con ID que registraste.</li>
+              <li>Factura que corrobore la dirección que registraste.</li>
             </ul>
           </div>
           <div class="col-6 inputbox">
@@ -75,11 +75,22 @@
 </section>
 
 <br>
+<div class="col-12 md:col-12 lg:col-12">
+  <p-messages severity="info">
+    <ng-template pTemplate>
+      <h1 class="terminos-label">
+        Al finalizar tu registro dirígete a nuestra<a class="button-link"
+          href="https://wa.link/salvadorsv"> billetera conversacional</a>
+      </h1>
+    </ng-template>
+  </p-messages>
+</div>
 <div class="grid justify-content-center">
   <div class="col">
   </div>
   <div class="col-fixed">
-    <p-button label="Siguiente" (onClick)="sendDataDocuments()" icon="pi pi-angle-right" iconPos="right">
+    <p-button label="Siguiente" (onClick)="sendDataDocuments()" icon="pi pi-angle-right" iconPos="right"
+    [disabled]="formDocuments.invalid">
     </p-button>
   </div>
 </div>

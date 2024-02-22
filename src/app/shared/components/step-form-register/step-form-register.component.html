@@ -1,9 +1,9 @@
-<p-toast></p-toast>
+<p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
 <div class="html">
   <div class="body" id="top">
     <p-menubar>
       <ng-template pTemplate="start">
-        <a href="#"><img src="../../../../assets/layout/images/login/logo_salvador.jpg" class="logo" /></a>
+        <a pTooltip="¿Quieres regresar a la web principal?" href="https://salvadorsv.com/"><img src="../../../../assets/layout/images/dashboard/sv.png" class="logo" /></a>
       </ng-template>
       <ng-template pTemplate="end">
         <a href="#" class="btn btn-primary">

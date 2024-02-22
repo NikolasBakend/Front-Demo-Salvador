@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<body [ngClass]="{'active': isClassEnabled}">
+  <div class="wrapper">
+    <div class="section">
+ <div class="top_navbar">
+   <div class="hamburger">
+    <button class="hamburger" id="hamburger-button" (click)="efectos()">
+      <i class="fas fa-bars"></i>
+    </button>
+   </div>
+   <img src="../../../../assets/layout/images/dashboard/sv.png" height="80"/>
+ </div>
+ <div class="container">
+  <router-outlet></router-outlet>
+ </div>
+</div>
+     <div class="sidebar">
+         <div class="profile">
+             <img src="../../../../assets/layout/images/dashboard/salsv.png" alt="profile_picture">
+             <h3>Tablero de Consultas</h3>
+         </div>
+         <ul>
+             <li>
+                 <a href="https://salvadorsv.com/">
+                     <span class="icon"><i class="fas fa-home"></i></span>
+                     <span class="item">Salvador web</span>
+                 </a>
+             </li>
+             <li>
+              <a href="https://wa.link/salvadorsv">
+                  <span class="icon"><i class="fas fa-credit-card"></i></span>
+                  <span class="item">Entrar a billetera</span>
+              </a>
+          </li>
+             <li>
+                 <a routerLink="/dashboard/detalle-deposito">
+                     <span class="icon"><i class="fas fa-desktop"></i></span>
+                     <span class="item">Depositos</span>
+                 </a>
+             </li>
+             <li>
+                 <a routerLink="/dashboard/transaciones-enviadas">
+                     <span class="icon"><i class="fas fa-user-friends"></i></span>
+                     <span class="item">Transacciones enviadas</span>
+                 </a>
+             </li>
+             <li>
+                 <a routerLink="/dashboard/transaciones-recibidas">
+                     <span class="icon"><i class="fas fa-tachometer-alt"></i></span>
+                     <span class="item">transacciones recibidas</span>
+                 </a>
+             </li>
+             <li>
+                 <a routerLink="/dashboard/detalle-retiros">
+                     <span class="icon"><i class="fas fa-database"></i></span>
+                     <span class="item">Retiros</span>
+                 </a>
+             </li>
+
+             <li>
+              <a routerLink="/informacion-cliente/verificacion">
+                  <span class="icon"><i class="fas fa-user-check"></i></span>
+                  <span class="item">Verificar cuenta</span>
+              </a>
+            </li>
+             <li>
+                  <button type="button" (click)="logout()" class="button">
+                    <span class="icon"><i class="fas fa-cog"></i></span>
+                    <span class="item">Logout</span>
+                  </button>
+             </li>
+         </ul>
+     </div>
+
+ </div>
+</body>
+
